@@ -108,7 +108,15 @@ input "1452:613:Apple_Inc._Magic_Trackpad_2" {
 
 ### window decorations
     default_border none
-    gaps inner 50
+    gaps inner 5
+for_window [app_id="^.*"] border pixel 5
+for_window [class="^.*"] border pixel 5
+#class                 border  backgr. text    indicator child_border
+client.focused           #be5046 #be5046 #be5046 #be5046   #be5046
+client.focused_inactive  #5c6370 #3b3228 #ffffff #5c6370   #5c6370
+client.unfocused         #5c6370 #3b3228 #ffffff #5c6370   #5c6370
+# #client.urgent            #cb6077 #3b3228 #ffffff #cb6077   #cb6077
+# #client.placeholder      #000000 #3b3228 #ffffff #000000   #0c0c0c
 
 ### Key bindings
 #
