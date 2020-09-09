@@ -1,0 +1,28 @@
+# Load oh-my-zsh library.
+antigen use oh-my-zsh
+
+# Load bundles from the default repo (oh-my-zsh).
+antigen bundle aws
+antigen bundle command-not-found
+antigen bundle git
+antigen bundle pyenv
+antigen bundle jira
+antigen bundle python
+antigen bundle fzf
+antigen bundle golang
+antigen bundle poetry
+antigen bundle docker
+antigen bundle kubectl
+antigen bundle pipenv
+antigen bundle tmux
+antigen bundle history
+antigen bundle pass
+
+# Load bundles from external repos.
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Tell Antigen that you're done.
+antigen apply

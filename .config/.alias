@@ -1,0 +1,9 @@
+alias teampass='PASSWORD_STORE_DIR=~/.pass/team/ pass'
+alias sha256sum="shasum -a 256"
+alias pswd='date +%s | sha256sum | base64 | head -c 10 ; echo'
+alias tunnelme='ssh -D 8123 -f -C -q -N ops-bast'
+alias bounceme='ssh -L 5901:localhost:5901 gw02'
+alias tldr='f(){ curl -s "cheat.sh/$(echo -n "$*"|jq -sRr @uri)";};f'
+alias tfswitch='tfswitch -b ~/bin/terraform'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
