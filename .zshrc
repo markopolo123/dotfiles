@@ -2,9 +2,15 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/mark/.oh-my-zsh"
-export FZF_BASE=usr/bin
+export ZSH="/home/mcs94/.oh-my-zsh"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
+#export PATH="$HOME/go/bin:$PATH"
+export GOPATH="/home/mcs94/go"
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/${GOPATH//://bin:}/bin
 
+# export _JAVA_AWT_WM_NONREPARENTING=1
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -13,6 +19,20 @@ export FZF_BASE=usr/bin
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="gruvbox"
 #SOLARIZED_THEME="dark"
+
+
+
+eval `keychain --eval --agents gpg,ssh id_rsa`
+export PASSWORD_STORE_DIR=$HOME/.pass/team/
+alias teampass='PASSWORD_STORE_DIR=~/.pass/team/ pass'
+alias sha256sum="shasum -a 256"
+alias pswd='date +%s | sha256sum | base64 | head -c 10 ; echo'
+alias tunnelme='ssh -D 8123 -f -C -q -N ops-bast'
+alias bounceme='ssh -L 5901:localhost:5901 gw02'
+alias tldr='f(){ curl -s "cheat.sh/$(echo -n "$*"|jq -sRr @uri)";};f'
+alias tfswitch='tfswitch -b ~/bin/terraform'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -78,12 +98,19 @@ plugins=(
   jira
   python
   fzf
+  golang
+  poetry
   docker
   kubectl
+  pipenv
+  taskwarrior
   tmux
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  history
+  pass
 )
 source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -111,3 +138,22 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+load-tfswitch() {
+  local tfswitchrc_path=".tfswitchrc"
+
+  if [ -f "$tfswitchrc_path" ]; then
+    tfswitch
+  fi
+}
+
+ttyctl -f
+
+add-zsh-hook chpwd load-tfswitch
+load-tfswitch
+compinit
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
