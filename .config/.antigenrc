@@ -17,6 +17,7 @@ antigen bundle pipenv
 antigen bundle tmux
 antigen bundle history
 antigen bundle pass
+antigen bundle pip
 
 # Load bundles from external repos.
 antigen bundle unixorn/autoupdate-antigen.zshplugin
