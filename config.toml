@@ -1,0 +1,9 @@
+[tasks.default]
+    links = [
+        [".hammerspoon/init.lua"],
+        [".tmux.conf"],
+        [".config/alacritty/alacritty.yml"],
+        [".config/karabiner/karabiner.json"],
+        ["..config/starship.toml"],
+        [".zshrc"],
+    ]
