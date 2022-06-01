@@ -1,18 +1,15 @@
 alias l='ls -GwF'
 alias ll='ls -alh'
-alias tfswitch='tfswitch -b /Users/kbhm220/bin/terraform'
 alias lg='lazygit'
-alias md5sum='md5 -r'
+alias tfswitch='tfswitch -b /Users/$USER/bin/terraform'
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey '^[[Z' reverse-menu-complete
 
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /Users/kbhm220/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source /Users/kbhm220/.zsh/completion.zsh
-source /Users/kbhm220/.zsh/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh
 # Initialize the completion system
 autoload -Uz compinit
 
@@ -24,34 +21,44 @@ else
   compinit -C -i
 fi
 
+source $(brew --prefix)/share/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle fzf
+antigen bundle pyenv
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle pip
+antigen bundle direnv
+antigen bundle autojump
+antigen bundle zsh-users/zsh-autosuggestions
+
+antigen apply
 # Enhanced form of menu completion called `menu selection'
 zmodload -i zsh/complist
 
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-export PATH=$PATH:/Users/kbhm220/bin
+export PATH=$PATH:/Users/$USER/bin
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
-eval "$(pyenv init -)"
 
 load-tfswitch() {
   local tfswitchrc_path=".tfswitchrc"
-
   if [ -f "$tfswitchrc_path" ]; then
     tfswitch
   fi
 }
+
 add-zsh-hook chpwd load-tfswitch
 load-tfswitch
+
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/kbhm220/bin/nomad-pack nomad-pack
+export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
