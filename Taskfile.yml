@@ -1,0 +1,46 @@
+---
+version: '3'
+
+tasks:
+  init:
+    desc: Prepare for launch
+    cmds:
+      - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      - brew install go-task/tap/go-task
+    status:
+      - brew config
+      - task -l
+  packages:
+    deps: [init]
+    desc: Install brew dump
+    cmds:
+      - brew bundle install
+    status:
+      - espanso path
+  extra_config:
+    deps: [packages, tmux_tpm, miro]
+    desc: Install homemaker
+    cmds:
+      - wget https://github.com/FooSoft/homemaker/releases/download/21.12.14.0/homemaker_darwin_amd64.tar.gz -O - | tar -xz -C /usr/local/bin
+    status:
+      - test -f/usr/local/bin/homemaker
+  tmux_tpm:
+    deps: [init]
+    desc: install tmux tpm
+    cmds:
+      - git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    status:
+      - test -d ~/.tmux/plugins/tpm
+  miro:
+    deps: [init]
+    desc: install miro
+    cmds: 
+      - mkdir -p ~/.hammerspoon/Spoons
+      - wget https://github.com/miromannino/miro-windows-manager/archive/refs/tags/1.1.zip -O miro.zip && unzip miro.zip -d ~/.hammerspoon/Spoons
+    status:
+      - test -d ~/.hammerspoon/Spoons/MiroWindowsManager.spoon
+  homemaker:
+    deps: [init]
+    desc: Home is an invention on which no one has yet improved
+    cmds:
+      - homemaker -clobber config.toml .

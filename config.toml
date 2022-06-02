@@ -4,6 +4,7 @@
         [".tmux.conf"],
         [".config/alacritty/alacritty.yml"],
         [".config/karabiner/karabiner.json"],
-        ["..config/starship.toml"],
+        [".config/starship.toml"],
         [".zshrc"],
+        ["/Users/msh/Library/Application Support/espanso/config/default.yml", "default.yml"]
     ]
