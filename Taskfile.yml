@@ -37,6 +37,7 @@ tasks:
     cmds: 
       - mkdir -p ~/.hammerspoon/Spoons
       - wget https://github.com/miromannino/miro-windows-manager/archive/refs/tags/1.1.zip -O miro.zip && unzip miro.zip -d ~/.hammerspoon/Spoons
+      - rm miro.zip
     status:
       - test -d ~/.hammerspoon/Spoons/MiroWindowsManager.spoon
   homemaker:
