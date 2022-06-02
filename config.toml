@@ -6,5 +6,5 @@
         [".config/karabiner/karabiner.json"],
         [".config/starship.toml"],
         [".zshrc"],
-        ["/Users/msh/Library/Application Support/espanso/config/default.yml", "default.yml"]
+        ["/Users/msh/Library/Application Support/espanso/match/base.yml", "base.yml"]
     ]
