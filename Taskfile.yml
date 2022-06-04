@@ -2,14 +2,12 @@
 version: '3'
 
 tasks:
-  init:
+  bootstrap:
     desc: Prepare for launch
     cmds:
       - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      - brew install go-task/tap/go-task
     status:
       - brew config
-      - task -l
   packages:
     deps: [init]
     desc: Install brew dump
@@ -23,16 +21,16 @@ tasks:
     cmds:
       - wget https://github.com/FooSoft/homemaker/releases/download/21.12.14.0/homemaker_darwin_amd64.tar.gz -O - | tar -xz -C /usr/local/bin
     status:
-      - test -f/usr/local/bin/homemaker
+      - test -f /usr/local/bin/homemaker
   tmux_tpm:
-    deps: [init]
+    deps: [bootstrap]
     desc: install tmux tpm
     cmds:
       - git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     status:
       - test -d ~/.tmux/plugins/tpm
   miro:
-    deps: [init]
+    deps: [bootstrap]
     desc: install miro
     cmds: 
       - mkdir -p ~/.hammerspoon/Spoons
@@ -41,7 +39,7 @@ tasks:
     status:
       - test -d ~/.hammerspoon/Spoons/MiroWindowsManager.spoon
   homemaker:
-    deps: [init]
+    deps: [bootstrap, extra_config]
     desc: Home is an invention on which no one has yet improved
     cmds:
       - homemaker -clobber config.toml .
