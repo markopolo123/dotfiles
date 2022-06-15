@@ -4,24 +4,32 @@ version: '3'
 tasks:
   bootstrap:
     desc: Prepare for launch
+    summary: |
+      Bootstrap your environment
+
+      This will download homebrew, install golang, build the latest version of homemaker.
+
     cmds:
       - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      - mkdir -p ~/bin
+      - brew install go
+      - go install github.com/FooSoft/homemaker@latest
+      - cp ~/go/bin/homemaker ~/bin
     status:
-      - brew config
+      - test -f ~/bin/homemaker
+
   packages:
-    deps: [init]
+    deps: [bootstrap]
     desc: Install brew dump
     cmds:
-      - brew bundle install
-    status:
-      - espanso path
-  extra_config:
-    deps: [packages, tmux_tpm, miro]
-    desc: Install homemaker
+      - brew bundle install --file=./Brewfile-$DEVICE
+
+  dump-packages:
+    deps: [bootstrap]
+    desc: Dump a brewfile
     cmds:
-      - wget https://github.com/FooSoft/homemaker/releases/download/21.12.14.0/homemaker_darwin_amd64.tar.gz -O - | tar -xz -C /usr/local/bin
-    status:
-      - test -f /usr/local/bin/homemaker
+      - brew bundle dump --force --file=./Brewfile-$DEVICE
+
   tmux_tpm:
     deps: [bootstrap]
     desc: install tmux tpm
@@ -29,17 +37,9 @@ tasks:
       - git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     status:
       - test -d ~/.tmux/plugins/tpm
-  miro:
-    deps: [bootstrap]
-    desc: install miro
-    cmds: 
-      - mkdir -p ~/.hammerspoon/Spoons
-      - wget https://github.com/miromannino/miro-windows-manager/archive/refs/tags/1.1.zip -O miro.zip && unzip miro.zip -d ~/.hammerspoon/Spoons
-      - rm miro.zip
-    status:
-      - test -d ~/.hammerspoon/Spoons/MiroWindowsManager.spoon
+
   homemaker:
-    deps: [bootstrap, extra_config]
+    # deps: [bootstrap, extra_config]
     desc: Home is an invention on which no one has yet improved
     cmds:
-      - homemaker -clobber config.toml .
+      - ~/bin/homemaker -clobber config.toml .

@@ -1,10 +1,12 @@
 [tasks.default]
     links = [
-        [".hammerspoon/init.lua"],
-        [".tmux.conf"],
+        [".hammerspoon"],
+        [".tmux.conf", "./tmux/.tmux.conf"],
         [".config/alacritty/alacritty.yml"],
         [".config/karabiner/karabiner.json"],
         [".config/starship.toml"],
-        [".zshrc"],
-        ["/Users/msh/Library/Application Support/espanso/match/base.yml", "base.yml"]
+        [".zshrc", "./zsh/.zshrc"],
+        [".zprofile", "./zsh/.zprofile"],
+        ["/Users/msh/Library/Application Support/espanso/match/base.yml", "./espanso/base.yml"],
+        ["/Users/msh/Library/Application Support/lazygit/config.yml", "./lg/config.yml"]
     ]

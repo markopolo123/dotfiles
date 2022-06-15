@@ -1,0 +1,6 @@
+customCommands:
+  - key: "C"
+    command: "cz c -s"
+    context: "files"
+    loadingText: "opening commitizen commit tool"
+    subprocess: true

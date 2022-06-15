@@ -46,69 +46,63 @@ end
 
 
 
--- WORK-RELATED AUTOMATION --
+-- -- WORK-RELATED AUTOMATION --
 
-local workWifi = "AZ-Corporate"
+-- local workWifi = "AZ-Corporate"
 
-hs.wifi.watcher.new(function ()
-  local currentWifi = wifi.currentNetwork()
-  -- short-circuit if disconnectingw
-  if not currentWifi then return end
+-- hs.wifi.watcher.new(function ()
+--   local currentWifi = wifi.currentNetwork()
+--   -- short-circuit if disconnectingw
+--   if not currentWifi then return end
 
-  local note = hs.notify.new({
-    title="Welcome to the office",
-    informativeText="Now connected to " .. currentWifi
-  }):send()
+--   local note = hs.notify.new({
+--     title="Welcome to the office",
+--     informativeText="Now connected to " .. currentWifi
+--   }):send()
 
   --Dismiss notification in 3 seconds
   --Notification does not auto-withdraw if Hammerspoon is set to use "Alerts"
   --in System Preferences > Notifications
-  hs.timer.doAfter(3, function ()
-    note:withdraw()
-    note = nil
-  end)
+  -- hs.timer.doAfter(3, function ()
+  --   note:withdraw()
+  --   note = nil
+  -- end)
 
-  if currentWifi == workWifi then
-    -- Allowance for internet connectivity delays.
-    hs.timer.doAfter(3, function ()
-      hs.execute('kess', true)
-    end)
-  end
-end):start()
+--   if currentWifi == workWifi then
+--     -- Allowance for internet connectivity delays.
+--     hs.timer.doAfter(3, function ()
+--       hs.execute('kess', true)
+--     end)
+--   end
+-- end):start()
 
--- END WORK-RELATED AUTOMATION --
-
-
+-- -- END WORK-RELATED AUTOMATION --
 
 
 
-hs.hotkey.bind(hyper, "S", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
-
-
---- A closure function
+-- --- A closure function
 function open(name)
-    return function()
-        hs.application.launchOrFocus(name)
-        if name == 'Finder' then
-            hs.appfinder.appFromName(name):activateshift()
-        end
+  return function()
+    hs.application.launchOrFocus(name)
+    if name == 'Finder' then
+      hs.appfinder.appFromName(name):activateshift()
     end
+  end
 end
 
 function moveWindowToDisplay(d)
-    return function()
-      local displays = hs.screen.allScreens()
-      local win = hs.window.focusedWindow()
-      win:moveToScreen(displays[d], false, true)
-    end
+  return function()
+    local displays = hs.screen.allScreens()
+    local win = hs.window.focusedWindow()
+    win:moveToScreen(displays[d], false, true)
   end
-  
-  hs.hotkey.bind(hyper, "1", moveWindowToDisplay(1))
-  hs.hotkey.bind(hyper, "2", moveWindowToDisplay(2))
-  hs.hotkey.bind(hyper, "3", moveWindowToDisplay(3))
+end
 
+hs.hotkey.bind(hyper, "1", moveWindowToDisplay(1))
+hs.hotkey.bind(hyper, "2", moveWindowToDisplay(2))
 
 --- quick open applications
+hs.hotkey.bind(hyper, "S", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 hs.hotkey.bind(hyper, "A", open("Alacritty"))
 hs.hotkey.bind(hyper, "V", open("Visual Studio Code"))
 hs.hotkey.bind(hyper, "O", open("Obsidian"))
