@@ -24,24 +24,29 @@ matches:
         type: shell
         params:
           cmd: "echo Hello from your shell"
-# new note metdata
+
+  # new note metdata
   - trigger: ";snip"
     replace: |
-              #snippet
-              ---
-              description: $|$
-              last-reviewed: {{mydate}}
-              ---
+      #snippet
+      ---
+      description: $|$
+      last-reviewed: {{mydate}}
+      ---
     vars:
       - name: mydate
         type: date
         params:
           format: "%Y%m%d"
 
+  - trigger: ";todo"
+    replace: "- [ ] "
   - trigger: "sth"
     replace: "something"
     word: true
   - trigger: ";i"
     replace: |
-             #idea 
-             idea:: $|$
+      #idea (idea:: $|$) (followup:: )
+  - trigger: "use-jira"
+    replace: |
+      Please note we have a create service request button at the top of this channel which you can use to submit a ticket :point_up:

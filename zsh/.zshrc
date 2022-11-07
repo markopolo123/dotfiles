@@ -10,6 +10,11 @@ eval "$(direnv hook zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey '^[[Z' reverse-menu-complete
 
+
+set -o autopushd
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' menu select=2
+
 # Initialize the completion system
 autoload -Uz compinit
 
@@ -62,3 +67,4 @@ load-tfswitch
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
