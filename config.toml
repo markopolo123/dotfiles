@@ -8,5 +8,6 @@
         [".zshrc", "./zsh/.zshrc"],
         [".zprofile", "./zsh/.zprofile"],
         ["/Users/msh/Library/Application Support/espanso/match/base.yml", "./espanso/base.yml"],
+        ["/Users/msh/Library/Application Support/espanso/config/default.yml", "./espanso/default.yml"],
         ["/Users/msh/Library/Application Support/lazygit/config.yml", "./lg/config.yml"]
     ]
