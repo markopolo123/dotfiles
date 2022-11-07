@@ -16,22 +16,13 @@ matches:
         params:
           format: "%Y%m%d"
 
-  # Shell commands
-  - trigger: ";shell"
-    replace: "{{output}}"
-    vars:
-      - name: output
-        type: shell
-        params:
-          cmd: "echo Hello from your shell"
-
   # new note metdata
   - trigger: ";snip"
     replace: |
       #snippet
       ---
-      description: $|$
-      last-reviewed: {{mydate}}
+      description:: $|$
+      last-reviewed:: {{mydate}}
       ---
     vars:
       - name: mydate
