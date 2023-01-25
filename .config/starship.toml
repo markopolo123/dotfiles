@@ -28,6 +28,18 @@ symbol = "🐍 "
 pyenv_version_name = false
 version_format = "v${raw}"
 
+[aws]
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = "bold blue"
+symbol = "🅰 "
+[aws.region_aliases]
+eu-west-1 = "london"
+
+
+[kubernetes]
+format = '@ [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+disabled = false
+
 [openstack]
 format = "on [$symbol$cloud(\\($project\\))]($style) "
 style = "bold yellow"

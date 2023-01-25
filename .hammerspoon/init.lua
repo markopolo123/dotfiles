@@ -1,4 +1,6 @@
 local hyper = {"ctrl", "alt", "cmd", "shift"}
+-- local hyper = {"f18"}
+
 hs.loadSpoon("MiroWindowsManager")
 
 hs.window.animationDuration = 0.1
