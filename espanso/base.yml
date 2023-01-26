@@ -42,4 +42,4 @@ matches:
     replace: |
       Please note we have a create service request button at the top of this channel which you can use to submit a ticket :point_up:
   - trigger: ";jira"
-    replace: "Jira:PLAT- "
+    replace: "Jira:PLAT-"
