@@ -32,6 +32,8 @@ matches:
 
   - trigger: ";todo"
     replace: "- [ ] "
+  - trigger: ";ap"
+    replace: "atlantis apply"
   - trigger: "sth"
     replace: "something"
     word: true

@@ -63,7 +63,7 @@ load-tfswitch() {
 
 add-zsh-hook chpwd load-tfswitch
 load-tfswitch
-
+export GOPATH="/Users/msh/go/"
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
