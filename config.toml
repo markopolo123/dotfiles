@@ -5,6 +5,7 @@
         [".config/alacritty/alacritty.yml"],
         [".config/karabiner/karabiner.json"],
         [".config/starship.toml"],
+        [".config/obnctl/config.toml"],
         [".zshrc", "./zsh/.zshrc"],
         [".zprofile", "./zsh/.zprofile"],
         ["/Users/msh/Library/Application Support/espanso/match/base.yml", "./espanso/base.yml"],
