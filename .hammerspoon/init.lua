@@ -110,3 +110,59 @@ hs.hotkey.bind(hyper, "V", open("Visual Studio Code"))
 hs.hotkey.bind(hyper, "O", open("Obsidian"))
 hs.hotkey.bind(hyper, "B", open("vivaldi"))
 
+hs.hotkey.bind(hyper, "H", function()
+  local script = [[
+  tell application "System Preferences"
+    activate
+    set the current pane to pane id "com.apple.preference.displays"
+    delay 2
+    tell application "System Events"
+      tell window "Displays" of application process "System Preferences"
+        click button "Display Settings…"
+        delay 2
+        select row 2 of outline 1 of scroll area 1 of sheet 1
+        click pop up button "Refresh Rate:" of sheet 1
+        delay 0.25
+        click menu item "120 Hertz" of menu 1 of pop up button "Refresh Rate:" of sheet 1
+        click button "Done" of sheet 1
+      end tell
+    end tell
+  end tell
+  -- Quit System Preferences
+  tell application "System Preferences" to quit
+  ]]
+  local _, res = hs.osascript.applescript(script)
+  if res then
+      hs.alert.show("Successfully changed refresh rate")
+  else
+      hs.alert.show("Failed to change refresh rate")
+  end
+end)
+
+
+local usbWatcher = nil
+
+-- This is our usbWatcher function
+-- lock when yubikey is removed
+function usbDeviceCallback(data)
+    -- this line will let you know the name of each usb device you connect, useful for the string match below
+    hs.notify.show("USB", "You just connected", data["productName"])
+    -- Replace "Yubikey" with the name of the usb device you want to use.
+    if string.match(data["productName"], "Yubikey") then
+        if (data["eventType"] == "added") then
+            hs.notify.show("Yubikey", "You just connected", data["productName"])
+            -- wake the screen up, so knock will activate
+            -- get knock here http://www.knocktounlock.com
+            os.execute("caffeinate -u -t 5")
+        elseif (data["eventType"] == "removed") then
+            -- replace +000000000000 with a phone number registered to iMessage
+            hs.messages.iMessage("+000000000000", "Your Yubikey was just removed from your Work iMac.")
+            -- this locks to screensaver
+            os.execute("pmset displaysleepnow")
+       end
+   end
+end
+
+-- Start the usb watcher
+usbWatcher = hs.usb.watcher.new(usbDeviceCallback)
+usbWatcher:start()

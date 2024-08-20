@@ -32,11 +32,15 @@ matches:
 
   - trigger: ";todo"
     replace: "- [ ] "
-  - trigger: ";ap"
+  - trigger: ";aap"
     replace: "atlantis apply"
+  - trigger: ";apl"
+    replace: "atlantis plan"
   - trigger: "sth"
     replace: "something"
     word: true
+  - trigger: ";jc"
+    replace: "jira comment --noedit -m "
   - trigger: ";i"
     replace: |
       #idea (idea:: $|$) (followup:: )

@@ -35,9 +35,9 @@ font:
   size: 15
   normal:
 
-    family: "Fira Code"
+    family: "FiraMono Nerd Font"
     # family: "Source Code Pro"
-    style: Retina
+    style: Regular
 key_bindings:
   - { key: F, mods: Alt, chars: "\x1bf" }
   - { key: B, mods: Alt, chars: "\x1bb" }
