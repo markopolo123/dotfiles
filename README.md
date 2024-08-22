@@ -1,10 +1,8 @@
 
 # What is this?
-
 A repo to manage my dotfiles and basic MacOS setup.
 
 # Pull yourself up by the bootstrap
-
 Use this handy script to put task file into `./bin`
 
 > Never run a script from the internet without checking it first!
