@@ -100,12 +100,12 @@ function moveWindowToDisplay(d)
   end
 end
 
-hs.hotkey.bind(hyper, "1", moveWindowToDisplay(1))
-hs.hotkey.bind(hyper, "2", moveWindowToDisplay(2))
+hs.hotkey.bind(hyper, "1", moveWindowToDisplay(2))
+hs.hotkey.bind(hyper, "2", moveWindowToDisplay(1))
 
 --- quick open applications
 hs.hotkey.bind(hyper, "S", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
-hs.hotkey.bind(hyper, "A", open("Alacritty"))
+hs.hotkey.bind(hyper, "A", open("Ghostty"))
 hs.hotkey.bind(hyper, "V", open("Visual Studio Code"))
 hs.hotkey.bind(hyper, "O", open("Obsidian"))
 hs.hotkey.bind(hyper, "B", open("vivaldi"))
