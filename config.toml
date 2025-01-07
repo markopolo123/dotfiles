@@ -40,6 +40,10 @@ links = [
         "./lg/config.yml",
     ],
     [
+        "/Users/msh/Library/Application Support/com.mitchellh.ghostty/config",
+        "./ghostty/config",
+    ],
+    [
         ".config/nvim",
     ],
 ]

@@ -1,0 +1,4 @@
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
+font-family = Fira Code Retina
+theme = GruvboxDark
